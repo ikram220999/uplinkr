@@ -1,0 +1,5 @@
+websocketserver/bin
+websocketserver/obj
+
+websocketclient/node_modules
+

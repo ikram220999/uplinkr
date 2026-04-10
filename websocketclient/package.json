@@ -1,0 +1,15 @@
+{
+  "name": "websocketclient",
+  "version": "1.0.0",
+  "main": "client.js",
+  "scripts": {
+    "start": "node client.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ws": "^8.20.0"
+  }
+}
