@@ -1,15 +1,28 @@
 {
   "name": "websocketclient",
   "version": "1.0.0",
-  "main": "client.js",
+  "type": "module",
+  "main": "cli.jsx",
+  "bin": {
+    "proxiee": "cli.jsx"
+  },
   "scripts": {
-    "start": "node client.js",
+    "start": "tsx cli.jsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "ink": "^7.0.0",
+    "meow": "^14.1.0",
+    "react": "^19.2.5",
     "ws": "^8.20.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/register": "^7.28.6",
+    "tsx": "^4.21.0"
   }
 }
