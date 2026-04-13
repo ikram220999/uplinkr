@@ -63,7 +63,7 @@ public class TunnelsController(
             var response = new RegisterTunnelResponse(
                 Subdomain: subdomain,
                 LocalPort: request.LocalPort,
-                WebSocketServerUrl: _tunneling.WebSocketServerUrl,
+                WebSocketServerUrl: "ws://localhost:4001",
                 PublicHost: BuildPublicHost(subdomain));
 
             return StatusCode(StatusCodes.Status201Created, response);

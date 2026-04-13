@@ -5,7 +5,7 @@ public class TunnelingOptions
     public const string SectionName = "Tunneling";
 
     /// <summary>Public WebSocket URL clients use to open the tunnel session (e.g. wss://ws.tunnel.example.com).</summary>
-    public string WebSocketServerUrl { get; set; } = "ws://localhost:8081";
+    public string WebSocketServerUrl { get; set; } = "ws://127.0.0.1:4001";
 
     /// <summary>Optional suffix for building a public host from the subdomain (e.g. "tunnel.example.com").</summary>
     public string? BaseDomain { get; set; }

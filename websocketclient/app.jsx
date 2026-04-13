@@ -7,7 +7,7 @@ const App = ({ port }) => {
   const [tunnelInfo, setTunnelInfo] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
   const [logs, setLogs] = useState([]);
-  
+
   const addLog = (logStr) => {
     setLogs((prev) => {
       const next = [...prev, logStr];
@@ -29,25 +29,25 @@ const App = ({ port }) => {
           },
           body: JSON.stringify({ LocalPort: parseInt(port, 10) })
         });
-        
+
         if (!res.ok) {
           const text = await res.text();
           throw new Error(`Failed to register tunnel: ${res.status} - ${text}`);
         }
-        
+
         const data = await res.json();
         setTunnelInfo(data);
         setStatus('connecting');
 
         const bridgeUrl = data.webSocketServerUrl || data.WebSocketServerUrl; // Handle different casing
         if (!bridgeUrl) throw new Error("No WebSocket URL received from API");
-
-        bridge = new BridgeClient(bridgeUrl, `http://localhost:${port}`, {
+        console.log(bridgeUrl);
+        bridge = new BridgeClient("ws://localhost:4001", `http://localhost:${port}`, {
           onConnect: () => setStatus('online'),
           onClose: () => {
             if (status !== 'error') setStatus('connecting');
           },
-          onRequest: ({ method, path }) => {},
+          onRequest: ({ method, path }) => { },
           onResponse: ({ method, path, status, durationMs }) => {
             const timeStr = new Date().toLocaleTimeString();
             const color = status >= 500 ? 'red' : status >= 400 ? 'yellow' : 'green';
@@ -58,7 +58,7 @@ const App = ({ port }) => {
             addLog(`[ERROR] ${msg}`);
           }
         });
-        
+
         bridge.runForever();
       } catch (err) {
         setStatus('error');
