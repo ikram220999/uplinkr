@@ -1,28 +1,38 @@
 {
-  "name": "websocketclient",
-  "version": "1.0.0",
+  "name": "uplinkr",
+  "version": "3.0.1",
   "type": "module",
-  "main": "cli.jsx",
+  "description": "Expose local HTTP ports through a reverse proxy tunnel",
   "bin": {
-    "proxiee": "bin.js"
+    "uplinkr": "bin.js"
   },
+  "files": [
+    "bin.js",
+    "cli.jsx",
+    "app.jsx",
+    "bridge.js",
+    "config.js"
+  ],
   "scripts": {
     "start": "tsx cli.jsx",
+    "build": "node build.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "ink": "^7.0.0",
-    "meow": "^14.1.0",
     "react": "^19.2.5",
+    "tsx": "^4.21.0",
     "ws": "^8.20.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@babel/preset-react": "^7.28.5",
     "@babel/register": "^7.28.6",
-    "tsx": "^4.21.0"
+    "esbuild": "^0.25.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

@@ -1,4 +1,44 @@
 import WebSocket from "ws";
+import { randomInt } from "crypto";
+
+const ADJECTIVES = [
+  "amber","azure","bold","brave","bright","calm","cedar","chill","clean","clear",
+  "cloud","coral","crisp","cyan","dark","dawn","deep","dusk","dusty","early",
+  "east","ember","faint","fast","fierce","firm","flash","flat","fleet","fresh",
+  "frost","gold","grand","green","grey","gust","hazy","high","hollow","icy",
+  "jade","keen","large","late","light","lime","lofty","lone","loud","lunar",
+  "mellow","mild","mint","misty","muted","navy","neat","noble","north","oak",
+  "ocean","olive","open","pale","pine","plain","polar","prime","proud","pure",
+  "quiet","rapid","raw","red","rich","rigid","risen","rocky","rose","rough",
+  "round","royal","ruby","rusty","sage","sandy","sharp","silent","silver","sleek",
+  "slim","slow","small","smart","smoky","snowy","soft","solar","solid","south",
+  "spare","stark","steel","still","stone","storm","strong","sunny","swift","tall",
+  "teal","thin","tidal","timber","tiny","tough","true","urban","vast","violet",
+  "vivid","warm","west","white","wide","wild","windy","winter","wise","young"
+];
+
+const NOUNS = [
+  "arc","ash","bay","beam","bear","bird","blade","bloom","bolt","brook",
+  "brush","canyon","cave","cedar","cliff","cloud","coast","comet","coral","creek",
+  "crest","crow","dale","dawn","deer","delta","dew","dome","dove","dune",
+  "dust","eagle","echo","elm","ember","fern","field","finch","fjord","flame",
+  "flare","fleet","flint","fog","ford","forest","fox","frost","gale","glade",
+  "glen","grove","gull","hawk","heath","hill","hollow","horizon","hound","isle",
+  "ivy","jay","kite","lake","lark","leaf","ledge","light","lily","lion",
+  "log","lynx","maple","marsh","mast","meadow","mesa","mist","moon","moss",
+  "moth","mount","oak","orbit","otter","owl","peak","pine","plain","pond",
+  "pool","quail","rain","raven","reed","reef","ridge","rift","river","robin",
+  "rock","root","rose","rush","sage","sand","seal","shadow","shore","sky",
+  "slate","slope","snow","spark","spring","star","stem","stone","storm","stream",
+  "sun","surf","swift","thorn","tide","timber","trail","vale","vine","wave",
+  "wren","wolf","wood","yard"
+];
+
+function generateTunnelId() {
+  const adj = ADJECTIVES[randomInt(ADJECTIVES.length)];
+  const noun = NOUNS[randomInt(NOUNS.length)];
+  return `${adj}-${noun}`;
+}
 
 function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
@@ -172,7 +212,6 @@ class BridgeClient {
         continue;
       }
 
-      console.log("tunnelId", this.tunnelId)
       // Send the tunnelId to register the connection with the server
       if (this.tunnelId) {
         ws.send(JSON.stringify({ type: "register", tunnelId: this.tunnelId }));
@@ -210,4 +249,4 @@ class BridgeClient {
   }
 }
 
-export { BridgeClient };
+export { BridgeClient, generateTunnelId };
